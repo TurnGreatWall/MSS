@@ -5,11 +5,11 @@ cat << 'EOF' > "/etc/network-mss.sh"
 #!/bin/bash
 
 common() {
-    # IPv4 规则
+
     iptables -t mangle -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
     iptables -t mangle -A OUTPUT -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 
-    # IPv6 规则
+
     ip6tables -t mangle -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
     ip6tables -t mangle -A OUTPUT -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 }
